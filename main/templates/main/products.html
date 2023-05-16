@@ -1,0 +1,91 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+
+    <!-- Page Content -->
+    <div class="page-heading products-heading header-text">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="text-content">
+              <h4>{{ prod_title.prod_title_1 }}</h4>
+              <h2>{{ prod_title.prod_title_1 }}</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="products">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="filters">
+              <ul>
+
+                  <li class="active" data-filter="*">All Products</li>
+                  {% for i in prod_list %}
+                    <li data-filter=".{{ i.prod_teg }}">{{ i.prod_name }}</li>
+                  {% endfor %}
+                 
+
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="filters-content">
+                <div class="row grid">
+
+                  {% for i in jarang_list %}
+                    <div class="col-lg-4 col-md-4 all {{ i.jarang_name.prod_teg }}">
+                      <div class="product-item">
+                        <a href="#"><img src="{{ i.image.url }}" alt=""></a>
+                        <div class="down-content">
+                          <a href="#"><h4>{{ i.line_1 }}|</h4></a>
+                          <h6>${{ i.price }}</h6>
+                          <p>{{ i.line_3 }}</p>
+                          <form method="post"> 
+                            {% csrf_token %} 
+                          <ul class="rating">
+
+                            <input type="submit" id="star1" name="rate" value="1">
+                            <label for="star1" title="text" type="submit"></label>
+                            <input type="radio" id="star2" name="rate" value="2">
+                            <label for="star2" title="text" type="submit" ></label>
+                            <input checked="" type="radio" id="star" name="rate" value="5">
+                            <label for="star3" title="text"></label>
+                            <input type="radio" id="star4" name="rate" value="4">
+                            <label for="star4" title="text"></label>
+                            <input type="radio" id="star5" name="rate" value="5">
+                            <label for="star5" title="text"></label> 
+                            {{ mean_grade }}
+                          </ul>
+                          </form>
+                          <span>Reviews ({{ i.review.count }})</span>
+                        </div>
+                      </div>
+                    </div>
+                  {% endfor %}
+          
+                </div>
+            </div>
+          </div>
+          <!-- <div class="col-md-12">
+            <ul class="pages">
+              <li><a href="#">1</a></li>
+              <li class="active"><a href="#">2</a></li>
+              <li><a href="#">3</a></li>
+              <li><a href="#">4</a></li>
+              <li><a href="#"><i class="fa fa-angle-double-right"></i></a></li>
+            </ul> -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+{% endblock %}
+
+
+
